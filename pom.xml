@@ -436,6 +436,13 @@
 			<version>1.0.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.lowagie</groupId>
+			<artifactId>itext</artifactId>
+			<version>2.1.7</version>
+			<scope>test</scope>
+		</dependency>
+
 		<!--  End of new 2.8.0 new dependencies -->
 
 		<dependency>
