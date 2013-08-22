@@ -34,8 +34,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.docx4j.XmlUtils;
 import org.docx4j.utils.ResourceUtils;
+import org.w3c.dom.Node;
 
-
+/*
+ * <BSI-CUSTOMIZED>
+ * This class replaces the original class provided by docx4j. It ignores any exceptions caused by
+ * elements defined in Microsoft's drawing extension namespace (http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing)
+ *
+ * All changes are enclosed by a BSI-CUSTOMIZED tag and the original class is removed from docx4j-nightly-20120105.jar
+ *
+ * 2013-02-13, abr
+ * </BSI-CUSTOMIZED>
+ */
 public class JaxbValidationEventHandler implements 
 ValidationEventHandler{
     
@@ -47,6 +57,10 @@ ValidationEventHandler{
 	}
 	
 	public final static String UNEXPECTED_MC_ALTERNATE_CONTENT = "unexpected element (uri:\"http://schemas.openxmlformats.org/markup-compatibility/2006\", local:\"AlternateContent\")";
+
+    // <BSI-CUSTOMIZED>
+    public final static String MICROSOFT_DRAWING_EXTENSION_NS = "http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing";
+    // </BSI-CUSTOMIZED>
 	
 	static Templates mcPreprocessorXslt;	
 	
@@ -66,6 +80,16 @@ ValidationEventHandler{
 	}
 	
     public boolean handleEvent(ValidationEvent ve) {            
+      // <BSI-CUSTOMIZED>
+      boolean shouldContinueLocal = false;
+      Node node = ve.getLocator().getNode();
+      if (node != null) {
+        if (MICROSOFT_DRAWING_EXTENSION_NS.equals(node.getNamespaceURI())) {
+          shouldContinueLocal = true;
+        }
+      }
+      // </BSI-CUSTOMIZED>
+		
       if (ve.getSeverity()==ValidationEvent.FATAL_ERROR 
        || ve.getSeverity()==ValidationEvent.ERROR){
     	  
@@ -100,8 +124,10 @@ ValidationEventHandler{
       // JAXB provider should attempt to continue its current operation. 
       // (Marshalling, Unmarshalling, Validating)
       log.info("continuing (with possible element/attribute loss)");
-       return shouldContinue;
-             
+      return shouldContinue
+        // <BSI-CUSTOMIZED>
+          || shouldContinueLocal;
+        // </BSI-CUSTOMIZED>
      }
     
     public String printSeverity(ValidationEvent ve) {
