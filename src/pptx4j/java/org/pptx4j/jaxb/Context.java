@@ -28,6 +28,7 @@ import javax.xml.bind.JAXBException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.docx4j.jaxb.Docx4jJaxbUtility;
 import org.docx4j.jaxb.NamespacePrefixMapperUtils;
 import org.docx4j.utils.ResourceUtils;
 
@@ -94,7 +95,7 @@ public class Context {
 		
 		try {	
 			
-			java.lang.ClassLoader classLoader = Context.class.getClassLoader();
+			java.lang.ClassLoader classLoader = Docx4jJaxbUtility.getClassLoader(Context.class);
 
 			jcPML = JAXBContext.newInstance("org.pptx4j.pml:" +
 					"org.docx4j.dml:org.docx4j.dml.chart:org.docx4j.dml.chartDrawing:org.docx4j.dml.compatibility:org.docx4j.dml.diagram:org.docx4j.dml.lockedCanvas:org.docx4j.dml.picture:org.docx4j.dml.wordprocessingDrawing:org.docx4j.dml.spreadsheetdrawing:" +

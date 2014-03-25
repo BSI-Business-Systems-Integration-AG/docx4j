@@ -28,6 +28,7 @@ import javax.xml.bind.JAXBException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.docx4j.jaxb.Docx4jJaxbUtility;
 import org.docx4j.jaxb.NamespacePrefixMapperUtils;
 import org.docx4j.utils.ResourceUtils;
 
@@ -93,7 +94,7 @@ public class Context {
 		
 		try {	
 			
-			java.lang.ClassLoader classLoader = Context.class.getClassLoader();
+			java.lang.ClassLoader classLoader = Docx4jJaxbUtility.getClassLoader(Context.class);
 				
 			jcSML = JAXBContext.newInstance("org.xlsx4j.sml:" +
 					"org.xlsx4j.schemas.microsoft.com.office.excel_2006.main:" +

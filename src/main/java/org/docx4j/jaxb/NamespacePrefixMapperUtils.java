@@ -44,7 +44,7 @@ public class NamespacePrefixMapperUtils {
 		haveTried = true;
 		
 		if (testContext==null) {
-			java.lang.ClassLoader classLoader = NamespacePrefixMapperUtils.class.getClassLoader();
+			java.lang.ClassLoader classLoader = Docx4jJaxbUtility.getClassLoader(NamespacePrefixMapperUtils.class);
 			testContext = JAXBContext.newInstance("org.docx4j.relationships",classLoader );
 		}
 		
@@ -96,7 +96,7 @@ public class NamespacePrefixMapperUtils {
 
 		if (prefixMapperRels!=null) return prefixMapperRels;
 		if (testContext==null) {
-			java.lang.ClassLoader classLoader = NamespacePrefixMapperUtils.class.getClassLoader();
+			java.lang.ClassLoader classLoader = Docx4jJaxbUtility.getClassLoader(NamespacePrefixMapperUtils.class);
 			testContext = JAXBContext.newInstance("org.docx4j.relationships",classLoader );
 		}
 		
