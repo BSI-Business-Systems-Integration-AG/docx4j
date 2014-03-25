@@ -42,7 +42,7 @@ public class NamespacePrefixMapperUtils {
 			// JBOSS might use a different class loader to load JAXBContext, which causes problems,
 			// so explicitly specify our class loader.
 			NamespacePrefixMapperUtils tmp = new NamespacePrefixMapperUtils();
-			java.lang.ClassLoader classLoader = tmp.getClass().getClassLoader();
+			java.lang.ClassLoader classLoader = Docx4jJaxbUtility.getClassLoader(tmp.getClass());
 			
 			testContext = JAXBContext.newInstance("org.docx4j.relationships",classLoader );
 		}
@@ -95,7 +95,7 @@ public class NamespacePrefixMapperUtils {
 			// JBOSS might use a different class loader to load JAXBContext, which causes problems,
 			// so explicitly specify our class loader.
 			NamespacePrefixMapperUtils tmp = new NamespacePrefixMapperUtils();
-			java.lang.ClassLoader classLoader = tmp.getClass().getClassLoader();
+			java.lang.ClassLoader classLoader = Docx4jJaxbUtility.getClassLoader(tmp.getClass());
 			
 			testContext = JAXBContext.newInstance("org.docx4j.relationships",classLoader );
 		}

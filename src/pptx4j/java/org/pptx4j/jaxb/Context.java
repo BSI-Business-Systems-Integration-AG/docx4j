@@ -24,6 +24,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
 import org.apache.log4j.Logger;
+import org.docx4j.jaxb.Docx4jJaxbUtility;
 import org.docx4j.jaxb.NamespacePrefixMapperUtils;
 import org.docx4j.utils.Log4jConfigurator;
 
@@ -65,7 +66,7 @@ public class Context {
 			// JBOSS might use a different class loader to load JAXBContext, which causes problems,
 			// so explicitly specify our class loader.
 			Context tmp = new Context();
-			java.lang.ClassLoader classLoader = tmp.getClass().getClassLoader();
+			java.lang.ClassLoader classLoader = Docx4jJaxbUtility.getClassLoader(tmp.getClass());
 			//log.info("\n\nClassloader: " + classLoader.toString() );			
 			
 			log.info("loading Context jcPML");			

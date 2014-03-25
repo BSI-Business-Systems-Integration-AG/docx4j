@@ -35,6 +35,7 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.docx4j.jaxb.Context;
+import org.docx4j.jaxb.Docx4jJaxbUtility;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.openpackaging.parts.JaxbXmlPart;
@@ -84,7 +85,7 @@ public class RemovalHandler {
 	 */
 	public RemovalHandler() {
 
-		final InputStream templateStream = getClass().getClassLoader()
+		final InputStream templateStream = Docx4jJaxbUtility.getClassLoader(getClass())
 				.getResourceAsStream(templateFile);
 		final Source templateSource = new StreamSource(templateStream);
 		try {
